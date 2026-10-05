@@ -1,0 +1,20 @@
+{
+  "name": "@app-alba/etabs-scripts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "material-general": "node src/material-general.ts"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@app-alba/etabs-bridge-client": "file:../../bridges/ETABS.Client"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^6.0.2"
+  }
+}

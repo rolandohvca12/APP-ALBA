@@ -1,0 +1,38 @@
+{
+  "name": "@app-alba/etabs-bridge-client",
+  "version": "0.1.0",
+  "description": "Strongly typed TypeScript client for the APP-ALBA ETABS bridge.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "host"
+  ],
+  "scripts": {
+    "build": "powershell -NoProfile -ExecutionPolicy Bypass -File ./build-package.ps1",
+    "test": "npm run build && node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "os": [
+    "win32"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^6.0.2"
+  }
+}

@@ -1,0 +1,149 @@
+# ETABS API Mapping
+
+| Campo | Valor |
+|---|---|
+| DLL | `C:\Program Files\Computers and Structures\ETABS 22\ETABSv1.dll` |
+| FileVersion | 2.8.0.0 |
+| Assembly | ETABSv1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=453d728ef24c6f5e |
+| Interfaces | 135 |
+| Enums | 57 |
+| Classes | 1 |
+| Public methods | 1281 |
+
+| API | Metodos | Metodos ref/out | C# | TS | Test |
+|---|---:|---:|---|---|---|
+| cAnalysisResults | 37 | 37 | ETABS | Pending | Pending |
+| cAnalysisResultsSetup | 21 | 10 | ETABS | Pending | Pending |
+| cAnalyze | 21 | 9 | ETABS | Pending | Pending |
+| cAreaElm | 13 | 12 | ETABS | Pending | Pending |
+| cAreaObj | 64 | 36 | ETABS | Pending | Pending |
+| cAutoSeismic | 6 | 5 | ETABS | Pending | Pending |
+| cAutoWind | 0 | 0 | ETABS | Pending | Pending |
+| cAutoWindBridge | 0 | 0 | ETABS | Pending | Pending |
+| cCaseBuckling | 0 | 0 | ETABS | Pending | Pending |
+| cCaseDirectHistoryLinear | 1 | 1 | ETABS | Pending | Pending |
+| cCaseDirectHistoryNonlinear | 1 | 1 | ETABS | Pending | Pending |
+| cCaseHyperStatic | 3 | 1 | ETABS | Pending | Pending |
+| cCaseModalEigen | 9 | 5 | ETABS | Pending | Pending |
+| cCaseModalHistoryLinear | 3 | 2 | ETABS | Pending | Pending |
+| cCaseModalHistoryNonlinear | 1 | 1 | ETABS | Pending | Pending |
+| cCaseModalRitz | 7 | 4 | ETABS | Pending | Pending |
+| cCaseResponseSpectrum | 16 | 13 | ETABS | Pending | Pending |
+| cCaseStaticLinear | 5 | 3 | ETABS | Pending | Pending |
+| cCaseStaticNonlinear | 21 | 11 | ETABS | Pending | Pending |
+| cCaseStaticNonlinearStaged | 29 | 20 | ETABS | Pending | Pending |
+| cCombo | 11 | 7 | ETABS | Pending | Pending |
+| cConstraint | 4 | 2 | ETABS | Pending | Pending |
+| cDatabaseTables | 25 | 23 | ETABS | Pending | Pending |
+| cDCoACI318_08_IBC2009 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoACI318_11 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoACI318_14 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoACI318_19 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoACI350_20 | 0 | 0 | ETABS | Pending | Pending |
+| cDCoAS_3600_09 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoAS_3600_2018 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoBS8110_97 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoChinese_2010 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoEurocode_2_2004 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoHong_Kong_CP_2013 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoIndian_IS_456_2000 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoItalianNTC2008C | 4 | 2 | ETABS | Pending | Pending |
+| cDCoMexican_RCDF_2004 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoMexican_RCDF_2017 | 4 | 2 | ETABS | Pending | Pending |
+| cDCompColAISC360_22 | 4 | 2 | ETABS | Pending | Pending |
+| cDCompColCSAS16_19 | 4 | 2 | ETABS | Pending | Pending |
+| cDCompColCSAS16_24 | 4 | 2 | ETABS | Pending | Pending |
+| cDCompColEurocode_4_2004 | 4 | 2 | ETABS | Pending | Pending |
+| cDCompColIS11384_2022 | 4 | 2 | ETABS | Pending | Pending |
+| cDConcreteShellDesignRequest | 0 | 0 | ETABS | Pending | Pending |
+| cDConcShellACI350_20 | 0 | 0 | ETABS | Pending | Pending |
+| cDConcShellEurocode_2_2004 | 0 | 0 | ETABS | Pending | Pending |
+| cDConcSlabACI318_14 | 1 | 1 | ETABS | Pending | Pending |
+| cDConcSlabACI318_19 | 1 | 1 | ETABS | Pending | Pending |
+| cDCoNZS_3101_2006 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoSP63133302011 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoTS_500_2000 | 4 | 2 | ETABS | Pending | Pending |
+| cDCoTS_500_2000_R2018 | 4 | 2 | ETABS | Pending | Pending |
+| cDesignCompositeBeam | 22 | 12 | ETABS | Pending | Pending |
+| cDesignCompositeColumn | 22 | 12 | ETABS | Pending | Pending |
+| cDesignConcrete | 14 | 9 | ETABS | Pending | Pending |
+| cDesignConcreteShell | 0 | 0 | ETABS | Pending | Pending |
+| cDesignConcreteSlab | 4 | 3 | ETABS | Pending | Pending |
+| cDesignForces | 5 | 5 | ETABS | Pending | Pending |
+| cDesignResults | 0 | 0 | ETABS | Pending | Pending |
+| cDesignShearWall | 6 | 5 | ETABS | Pending | Pending |
+| cDesignSteel | 24 | 14 | ETABS | Pending | Pending |
+| cDesignStrip | 7 | 4 | ETABS | Pending | Pending |
+| cDetailing | 49 | 46 | ETABS | Pending | Pending |
+| cDiaphragm | 5 | 2 | ETABS | Pending | Pending |
+| cDStAISC_ASD89 | 4 | 2 | ETABS | Pending | Pending |
+| cDStAISC_LRFD93 | 4 | 2 | ETABS | Pending | Pending |
+| cDStAISC360_05_IBC2006 | 4 | 2 | ETABS | Pending | Pending |
+| cDStAISC360_10 | 4 | 2 | ETABS | Pending | Pending |
+| cDStAISC360_16 | 4 | 2 | ETABS | Pending | Pending |
+| cDStAISC360_22 | 4 | 2 | ETABS | Pending | Pending |
+| cDStAustralian_AS4100_2020 | 4 | 2 | ETABS | Pending | Pending |
+| cDStAustralian_AS4100_98 | 4 | 2 | ETABS | Pending | Pending |
+| cDStBS5950_2000 | 4 | 2 | ETABS | Pending | Pending |
+| cDStCanadian_S16_09 | 4 | 2 | ETABS | Pending | Pending |
+| cDStCanadian_S16_14 | 4 | 2 | ETABS | Pending | Pending |
+| cDStCanadian_S16_19 | 4 | 2 | ETABS | Pending | Pending |
+| cDStCanadian_S16_24 | 4 | 2 | ETABS | Pending | Pending |
+| cDStChinese_2010 | 4 | 2 | ETABS | Pending | Pending |
+| cDStChinese_2018 | 4 | 2 | ETABS | Pending | Pending |
+| cDStEN1993_1_1_2005 | 4 | 2 | ETABS | Pending | Pending |
+| cDStEN1993_1_1_2022 | 4 | 2 | ETABS | Pending | Pending |
+| cDStEurocode_3_2005 | 4 | 2 | ETABS | Pending | Pending |
+| cDStIndian_IS_800_2007 | 4 | 2 | ETABS | Pending | Pending |
+| cDStItalianNTC2008S | 4 | 2 | ETABS | Pending | Pending |
+| cDStItalianNTC2018S | 4 | 2 | ETABS | Pending | Pending |
+| cDStNewZealand_NZS3404_97 | 4 | 2 | ETABS | Pending | Pending |
+| cDStSP16_13330_2011 | 4 | 2 | ETABS | Pending | Pending |
+| cDStSP16_13330_2017 | 4 | 2 | ETABS | Pending | Pending |
+| cEditArea | 0 | 0 | ETABS | Pending | Pending |
+| cEditFrame | 1 | 0 | ETABS | Pending | Pending |
+| cEditGeneral | 1 | 0 | ETABS | Pending | Pending |
+| cEditPoint | 0 | 0 | ETABS | Pending | Pending |
+| cFile | 8 | 1 | ETABS | Pending | Pending |
+| cFrameObj | 74 | 45 | ETABS | Pending | Pending |
+| cFunction | 7 | 3 | ETABS | Pending | Pending |
+| cFunctionRS | 4 | 2 | ETABS | Pending | Pending |
+| cFunctionTH | 0 | 0 | ETABS | Pending | Pending |
+| cGenDispl | 13 | 6 | ETABS | Pending | Pending |
+| cGenRefLine | 0 | 0 | ETABS | Pending | Pending |
+| cGridSys | 12 | 8 | ETABS | Pending | Pending |
+| cGroup | 8 | 4 | ETABS | Pending | Pending |
+| cHelper | 11 | 0 | ETABS | Pending | Pending |
+| cLineElm | 16 | 15 | ETABS | Pending | Pending |
+| cLinkElm | 0 | 0 | ETABS | Pending | Pending |
+| cLinkObj | 22 | 14 | ETABS | Pending | Pending |
+| cLoadCases | 7 | 3 | ETABS | Pending | Pending |
+| cLoadPatterns | 11 | 5 | ETABS | Pending | Pending |
+| cNamedDisplay | 0 | 0 | ETABS | Pending | Pending |
+| cNamedSet | 0 | 0 | ETABS | Pending | Pending |
+| cOAPI | 9 | 0 | ETABS | Pending | Pending |
+| cOptions | 2 | 1 | ETABS | Pending | Pending |
+| cPattern | 0 | 0 | ETABS | Pending | Pending |
+| cPierLabel | 6 | 2 | ETABS | Pending | Pending |
+| cPluginCallback | 1 | 0 | ETABS | Pending | Pending |
+| cPluginContract | 2 | 2 | ETABS | Pending | Pending |
+| cPointElm | 20 | 17 | ETABS | Pending | Pending |
+| cPointObj | 58 | 39 | ETABS | Pending | Pending |
+| cPropArea | 35 | 21 | ETABS | Pending | Pending |
+| cPropAreaSpring | 5 | 2 | ETABS | Pending | Pending |
+| cPropFrame | 105 | 59 | ETABS | Pending | Pending |
+| cPropFrameSDShape | 13 | 13 | ETABS | Pending | Pending |
+| cPropLineSpring | 5 | 2 | ETABS | Pending | Pending |
+| cPropLink | 39 | 34 | ETABS | Pending | Pending |
+| cPropMaterial | 46 | 29 | ETABS | Pending | Pending |
+| cPropMaterialTD | 0 | 0 | ETABS | Pending | Pending |
+| cPropPointSpring | 7 | 5 | ETABS | Pending | Pending |
+| cPropRebar | 4 | 4 | ETABS | Pending | Pending |
+| cPropTendon | 6 | 2 | ETABS | Pending | Pending |
+| cSapModel | 21 | 7 | ETABS | Pending | Pending |
+| cSelect | 6 | 1 | ETABS | Pending | Pending |
+| cSpandrelLabel | 6 | 3 | ETABS | Pending | Pending |
+| cStory | 17 | 10 | ETABS | Pending | Pending |
+| cTendonObj | 17 | 13 | ETABS | Pending | Pending |
+| cTower | 8 | 2 | ETABS | Pending | Pending |
+| cView | 2 | 0 | ETABS | Pending | Pending |

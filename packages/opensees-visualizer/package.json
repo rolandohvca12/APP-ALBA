@@ -1,0 +1,62 @@
+{
+  "name": "openseesjs-vis",
+  "version": "1.0.0",
+  "description": "Typed 2D/3D visualization and post-processing for openseesjs.",
+  "type": "module",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./viewer": {
+      "types": "./dist/viewer-index.d.ts",
+      "import": "./dist/viewer-index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "assets",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "test": "npm run build && node --test tests/core.test.mjs tests/integration.test.mjs",
+    "test:browser": "node tests/browser.test.mjs",
+    "verify:publish": "npm test && npm run test:browser",
+    "prepack": "npm test",
+    "prepublishOnly": "npm run verify:publish"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "peerDependencies": {
+    "openseesjs": ">=0.3.0 <2"
+  },
+  "dependencies": {
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/three": "^0.186.0",
+    "openseesjs": "file:../openseesjs",
+    "playwright": "^1.63.0",
+    "typescript": "^6.0.2"
+  },
+  "keywords": [
+    "opensees",
+    "openseesjs",
+    "structural-engineering",
+    "finite-element",
+    "visualization",
+    "threejs"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

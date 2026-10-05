@@ -1,0 +1,8 @@
+node_modules/
+native/build/
+examples/
+artifacts/
+/diagrams.assets
+OPENSEESJS_API_MANUAL.tex
+*.log
+.env

@@ -1,0 +1,49 @@
+# Editors and operating system
+.vscode/
+**/.vs/
+*.user
+*.suo
+.DS_Store
+Thumbs.db
+
+# JavaScript / Electron
+**/node_modules/
+**/dist/
+**/out/
+**/release/
+**/__pycache__/
+*.py[cod]
+*.out
+*.tgz
+npm-debug.log*
+
+# .NET / native builds
+**/bin/
+**/obj/
+**/build/
+**/vcpkg_installed/
+bridges/packages/
+bridges/ETABS.Client/host/
+packages/openseesjs/native/prebuilds/
+packages/npm-release/
+packages/opensees-visualizer/out.txt
+packages/opensees-visualizer/salida.txt
+
+# Generated application artifacts
+artifacts/
+tmp/
+installers/**/*.zip
+installers/**/*.exe
+
+# Local secrets and environment
+.env
+.env.*
+!.env.example
+*.token
+*.pem
+*.pfx
+*.key
+
+# Test and coverage output
+coverage/
+*.log

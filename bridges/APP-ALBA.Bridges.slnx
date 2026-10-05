@@ -1,0 +1,14 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="AutoCAD.Plugin/AutoCadRealtimeBridge.Plugin.csproj" Id="8c56b78f-a2ef-4459-b8af-a948d3bfea8f">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="ETABS.Api/EtabsRealtimeBridge.ETABS.csproj" Id="e3c3197b-75bb-44a4-85f3-1e36d4b81911" />
+  <Project Path="ETABS.Host/EtabsRealtimeBridge.Host.csproj" Id="cc426a91-05f4-4f76-ad94-01a39898d699">
+    <Platform Solution="*|Any CPU" Project="x64" />
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+</Solution>

@@ -1,0 +1,71 @@
+{
+  "name": "@app-alba/desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Desktop interface for APP ALBA structural workflows.",
+  "type": "module",
+  "main": "./out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "npm run typecheck && electron-vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
+    "preview": "electron-vite preview",
+    "package:win": "npm run build && electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.appalba.desktop",
+    "productName": "APP ALBA",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../../bridges/ETABS.Host/bin/x64/Release",
+        "to": "backends/etabs",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "../../packages/openseesjs-win32-x64",
+        "to": "backends/opensees",
+        "filter": [
+          "opensees.node",
+          "*.dll",
+          "BUILD_INFO.json"
+        ]
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    }
+  },
+  "dependencies": {
+    "@app-alba/autocad-client": "0.1.0",
+    "@app-alba/building-analysis": "0.1.0",
+    "@app-alba/engineering-units": "0.1.0",
+    "@app-alba/peru-rne": "0.1.0",
+    "@app-alba/structural-analysis": "0.1.0",
+    "@app-alba/etabs-bridge-client": "0.1.0",
+    "openseesjs": "0.3.0",
+    "@electron-toolkit/utils": "^4.0.0",
+    "lucide-react": "^0.544.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.4",
+    "electron": "44.4.3",
+    "electron-builder": "^26.0.12",
+    "electron-vite": "^4.0.0",
+    "typescript": "^6.0.2",
+    "vite": "^7.1.7"
+  }
+}

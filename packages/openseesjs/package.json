@@ -1,0 +1,79 @@
+{
+  "name": "openseesjs",
+  "version": "0.3.0",
+  "description": "Strongly typed OpenSees 3.8 native addon for Node.js and TypeScript.",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "APP-ALBA contributors",
+  "keywords": [
+    "opensees",
+    "structural-engineering",
+    "finite-element-analysis",
+    "earthquake-engineering",
+    "typescript",
+    "native-addon",
+    "node-api"
+  ],
+  "main": "dist/native-index.cjs",
+  "types": "dist/native-index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/native-index.d.ts",
+      "import": "./dist/native-index.js",
+      "require": "./dist/native-index.cjs"
+    }
+  },
+  "files": [
+    "dist/native-index.js",
+    "dist/native-index.js.map",
+    "dist/native-index.cjs",
+    "dist/native-index.cjs.map",
+    "dist/native-index.d.ts",
+    "dist/native-index.d.ts.map",
+    "dist/native",
+    "dist/openseespy/generated",
+    "dist/openseespy/createVariantCommand.js",
+    "dist/openseespy/createVariantCommand.js.map",
+    "dist/openseespy/types.js",
+    "dist/openseespy/types.js.map",
+    "dist/openseespy/types.d.ts",
+    "dist/openseespy/types.d.ts.map",
+    "API_REFERENCE.md",
+    "API_COVERAGE.md",
+    "OPENSEESJS_API_MANUAL.tex",
+    "licenses",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc -p tsconfig.json && npm run build:cjs",
+    "build:cjs": "esbuild src/native-index.ts --bundle --platform=node --format=cjs --target=node22 --outfile=dist/native-index.cjs --sourcemap --external:@openseesjs/* --define:import.meta.url=__filename",
+    "test": "npm run build && npm run verify:signatures && tsc -p tests/types/tsconfig.json && node --test tests/unit/*.test.mjs",
+    "test:types": "npm run build && tsc -p tests/types/tsconfig.json",
+    "test:integration": "npm run build && node --test tests/integration/*.test.mjs",
+    "verify:package": "node scripts/verify-package.mjs",
+    "verify:signatures": "node scripts/verify-public-signatures.mjs",
+    "verify:publish": "npm run test && npm run test:integration && npm run verify:package",
+    "prepack": "npm run build && npm run verify:package",
+    "prepublishOnly": "npm run verify:publish",
+    "native:check": "node native/check-build-environment.mjs",
+    "native:build": "powershell -NoProfile -ExecutionPolicy Bypass -File native/build-native.ps1"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "optionalDependencies": {
+    "@openseesjs/native-win32-x64": "0.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.25.10",
+    "typescript": "^6.0.2"
+  }
+}

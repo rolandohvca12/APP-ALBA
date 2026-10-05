@@ -1,0 +1,44 @@
+{
+  "name": "@app-alba/autocad-client",
+  "version": "0.1.0",
+  "description": "Typed TypeScript client and geometry workflows for the APP-ALBA AutoCAD bridge.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "example:tributary": "npm run build && node examples/workflows/areas-tributarias.ts",
+    "example:center-of-mass": "npm run build && node examples/workflows/centro-masa-planta.ts",
+    "example:building-center-of-mass": "npm run build && node examples/workflows/centro-masa-edificio.ts",
+    "capture:tributary-fixture": "npm run build && node scripts/capture-tributary-fixture.mjs",
+    "compare:tributary-fixture": "npm run build && node scripts/compare-tributary-fixture.mjs",
+    "typecheck:examples": "tsc -p tsconfig.examples.json",
+    "pruebas": "npx tsx ./pruebas/app.ts"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@rolandohvca12/structural-lib": "^1.0.0",
+    "clipper-lib": "^6.4.2",
+    "polygon-clipping": "^0.15.7",
+    "ws": "^8.21.3"
+  },
+  "devDependencies": {
+    "@types/clipper-lib": "^6.4.0",
+    "@types/node": "^24.0.0",
+    "@types/ws": "^8.18.1",
+    "typescript": "^6.0.2"
+  }
+}

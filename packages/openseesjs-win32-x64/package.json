@@ -1,0 +1,27 @@
+{
+  "name": "@openseesjs/native-win32-x64",
+  "version": "0.2.2",
+  "description": "Windows x64 native runtime for openseesjs.",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "APP-ALBA contributors",
+  "os": ["win32"],
+  "cpu": ["x64"],
+  "engines": { "node": ">=22" },
+  "files": [
+    "opensees.node",
+    "*.dll",
+    "BUILD_INFO.json",
+    "licenses",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "exports": {
+    "./opensees.node": "./opensees.node"
+  },
+  "publishConfig": { "access": "public" },
+  "scripts": {
+    "verify": "node scripts/verify-package.mjs",
+    "prepack": "npm run verify",
+    "prepublishOnly": "npm run verify"
+  }
+}

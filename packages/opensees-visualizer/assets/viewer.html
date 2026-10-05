@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{TITLE}}</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "/vendor/three.module.js",
+        "three/addons/": "/vendor/three/examples/jsm/"
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; letter-spacing: 0; }
+    html, body, #viewer { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body { font-family: "Segoe UI", Arial, sans-serif; background: #f7f8f7; color: #263238; }
+    canvas { display: block; }
+    .toolbar {
+      position: fixed; z-index: 5; top: 12px; left: 12px; display: flex; gap: 2px;
+      flex-wrap: wrap; max-width: calc(100vw - 24px);
+      padding: 4px; border: 1px solid #c8d0cc; border-radius: 6px; background: #fffffff2;
+      box-shadow: 0 4px 16px #17201c1a;
+    }
+    button {
+      width: 40px; height: 34px; border: 0; border-radius: 4px; background: transparent;
+      color: #263238; font: 600 11px/1 "Segoe UI", Arial, sans-serif; cursor: pointer;
+    }
+    button:hover { background: #e7eeeb; }
+    button.active { background: #d9e8e2; color: #0b5f55; }
+    button:disabled { cursor: wait; opacity: .65; }
+    select {
+      width: 124px; height: 34px; border: 0; border-left: 1px solid #d9dfdc;
+      background: transparent; color: #263238; padding: 0 6px; font: 600 11px/1 "Segoe UI", Arial, sans-serif;
+    }
+    select.compact { width: 68px; }
+    .speed {
+      width: 112px; height: 34px; display: grid; grid-template-columns: 72px 34px;
+      align-items: center; gap: 2px; padding: 0 4px; border-left: 1px solid #d9dfdc;
+    }
+    .speed input { width: 72px; margin: 0; }
+    .speed output { font: 600 11px/1 "Segoe UI", Arial, sans-serif; text-align: right; }
+    .selection {
+      position: fixed; z-index: 5; top: 70px; right: 12px; width: 236px; padding: 10px;
+      border: 1px solid #c8d0cc; border-radius: 6px; background: #fffffff2; font-size: 12px;
+      box-shadow: 0 4px 16px #17201c12;
+    }
+    .selection-title { display: block; margin-bottom: 8px; font-size: 12px; }
+    .selection table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .selection th, .selection td { padding: 2px 0; border-bottom: 1px solid #e4e8e6; }
+    .selection th { text-align: left; font-weight: 600; }
+    .selection td { text-align: right; }
+    .result-heading { margin: 8px 0 3px; color: #60706a; font-size: 10px; text-transform: uppercase; }
+    .station { display: grid; grid-template-columns: 1fr 34px; align-items: center; gap: 6px; margin-top: 8px; }
+    .station input { width: 100%; }
+    .station output { text-align: right; font-variant-numeric: tabular-nums; }
+    .timeline {
+      position: fixed; z-index: 5; right: 12px; bottom: 12px; left: 12px;
+      display: grid; grid-template-columns: 34px 1fr; align-items: center; gap: 8px;
+      padding: 8px 10px; border: 1px solid #c8d0cc; border-radius: 6px; background: #fffffff2;
+    }
+    .timeline input { width: 100%; }
+    .hidden { display: none; }
+    .closed { display: grid; min-height: 100%; place-items: center; font-size: 14px; }
+    @media (max-width: 600px) { .selection { top: 110px; right: 8px; width: 210px; } }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button id="iso" title="Isometric view">3D</button>
+    <button id="top" title="Top view">TOP</button>
+    <button id="front" title="Front view">FRT</button>
+    <button id="fit" title="Fit model">FIT</button>
+    <button id="deformed" title="Show or hide deformed shape" aria-pressed="false">DEF</button>
+    <button id="reactions" title="Show or hide reactions" aria-pressed="false">R</button>
+    <select id="diagram" class="compact" title="Internal-force diagram" aria-label="Internal-force diagram">
+      <option value="none">--</option>
+    </select>
+    <select id="mode" title="Vibration mode" aria-label="Vibration mode"></select>
+    <label class="speed" title="Animation speed">
+      <input id="speed" type="range" min="0.1" max="2" step="0.1" value="1" aria-label="Animation speed">
+      <output id="speed-value" for="speed">1.0×</output>
+    </label>
+    <button id="play" title="Play">▶</button>
+    <button id="pause" title="Pause">Ⅱ</button>
+    <button id="download" title="Download 5-second animation">↓</button>
+    <button id="close" title="Close viewer">×</button>
+  </div>
+  <aside id="selection" class="selection hidden">
+    <strong id="selection-title" class="selection-title"></strong>
+    <div id="selection-values"></div>
+    <label id="station-control" class="station hidden" title="Normalized element station">
+      <input id="station" type="range" min="0" max="1" step="0.01" value="0.5" aria-label="Normalized element station">
+      <output id="station-value" for="station">0.50</output>
+    </label>
+  </aside>
+  <div id="viewer"></div>
+  <div class="timeline">
+    <span id="frame">0</span>
+    <input id="timeline" type="range" min="0" max="1000" value="0" aria-label="Analysis frame">
+  </div>
+  <script type="module" src="/dist/launcher/client.js"></script>
+</body>
+</html>

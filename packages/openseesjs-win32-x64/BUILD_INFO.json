@@ -1,0 +1,13 @@
+{
+    "schemaVersion":  1,
+    "backend":  "direct-registered-command-dispatcher",
+    "openSeesVersion":  "3.8.0",
+    "openSeesSourceRevision":  "snapshot-sha256:a694f65069e79e04269f61abb4c971fe04ef5dfe2b2769e1c2d524e1ca349589",
+    "openSeesSourceFingerprintSha256":  "a694f65069e79e04269f61abb4c971fe04ef5dfe2b2769e1c2d524e1ca349589",
+    "nodeApi":  8,
+    "platform":  "win32",
+    "arch":  "x64",
+    "compiler":  "msvc",
+    "optimization":  "/O2 /DNDEBUG /OPT:REF /OPT:ICF",
+    "binarySha256":  "0ff2a81f88b8d3bed7645cc7760bd6bff410ecbc6d52c1c137c64827c1c092ec"
+}

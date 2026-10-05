@@ -1,0 +1,44 @@
+{
+  "name": "@app-alba/sdk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/desktop",
+    "apps/etabs-scripts",
+    "bridges/ETABS.Client",
+    "packages/autocad-client",
+    "packages/building-analysis",
+    "packages/structural-analysis",
+    "packages/openseesjs",
+    "packages/opensees-visualizer",
+    "packages/openseesjs-win32-x64",
+    "packages/engineering-units",
+    "packages/peru-rne"
+  ],
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    }
+  },
+  "scripts": {
+    "build:autocad": "npm run build --prefix ./packages/autocad-client",
+    "build:opensees": "npm run build --prefix ./packages/openseesjs",
+    "build:opensees-vis": "npm run build --prefix ./packages/opensees-visualizer",
+    "build:etabs": "npm run build --prefix ./bridges/ETABS.Client",
+    "build:units": "npm run build --workspace @app-alba/engineering-units",
+    "build:rne": "npm run build --workspace @app-alba/peru-rne",
+    "build:analysis": "npm run build --workspace @app-alba/building-analysis",
+    "build:structural": "npm run build --workspace @app-alba/structural-analysis",
+    "build:desktop": "npm run build --workspace @app-alba/desktop",
+    "dev": "npm run dev --workspace @app-alba/desktop",
+    "build:sdk": "npm run build:autocad && npm run build:opensees && npm run build:opensees-vis && npm run build:etabs && npm run build:units && npm run build:rne && npm run build:analysis && npm run build:structural",
+    "build": "npm run build:sdk && npm run build:desktop"
+  },
+  "allowScripts": {
+    "electron@44.4.3": true
+  }
+}
