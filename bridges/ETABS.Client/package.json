@@ -1,7 +1,7 @@
 {
-  "name": "@app-alba/etabs-bridge-client",
+  "name": "etabsjs",
   "version": "0.1.0",
-  "description": "Strongly typed TypeScript client for the APP-ALBA ETABS bridge.",
+  "description": "Strongly typed TypeScript and JavaScript API for CSI ETABS.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -21,6 +21,23 @@
   },
   "engines": {
     "node": ">=22"
+  },
+  "keywords": [
+    "etabs",
+    "structural-engineering",
+    "finite-element-analysis",
+    "typescript",
+    "javascript"
+  ],
+  "author": "Rolando Auqui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolandohvca12/APP-ALBA.git",
+    "directory": "bridges/ETABS.Client"
+  },
+  "homepage": "https://github.com/rolandohvca12/APP-ALBA/tree/main/bridges/ETABS.Client",
+  "bugs": {
+    "url": "https://github.com/rolandohvca12/APP-ALBA/issues"
   },
   "os": [
     "win32"
