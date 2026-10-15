@@ -15,7 +15,21 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH OFF)
 set(OPS_FINAL_TARGET OpenSeesLIB CACHE STRING "OpenSees target" FORCE)
 set(OPS_Use_Graphics_Option None CACHE STRING "Disable GUI renderers" FORCE)
 
+find_package(HDF5 REQUIRED COMPONENTS C HL)
+if(NOT TARGET HDF5::HDF5)
+  add_library(HDF5::HDF5 INTERFACE IMPORTED GLOBAL)
+  set_target_properties(HDF5::HDF5 PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES "${HDF5_INCLUDE_DIRS}"
+    INTERFACE_LINK_LIBRARIES "${HDF5_LIBRARIES}"
+  )
+endif()
+
 add_subdirectory("${OPEN_SEES_SOURCE_DIR}" opensees EXCLUDE_FROM_ALL)
+
+# OpenSees 3.8.0 declares OPS_Api as an empty OBJECT library on Unix.
+if(TARGET OPS_Api)
+  target_sources(OPS_Api PRIVATE src/opensees_api_anchor.cpp)
+endif()
 
 add_library(opensees_node MODULE
   src/opensees_node.cpp
