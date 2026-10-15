@@ -65,6 +65,17 @@ add_library(opensees_node MODULE
   "${OPEN_SEES_SOURCE_DIR}/SRC/actor/objectBroker/FEM_ObjectBrokerAllClasses.cpp"
 )
 
+file(GLOB_RECURSE OPEN_SEES_HEADERS CONFIGURE_DEPENDS
+  "${OPEN_SEES_SOURCE_DIR}/SRC/*.h"
+  "${OPEN_SEES_SOURCE_DIR}/OTHER/*.h"
+)
+set(OPEN_SEES_HEADER_DIRS "")
+foreach(OPEN_SEES_HEADER IN LISTS OPEN_SEES_HEADERS)
+  get_filename_component(OPEN_SEES_HEADER_DIR "${OPEN_SEES_HEADER}" DIRECTORY)
+  list(APPEND OPEN_SEES_HEADER_DIRS "${OPEN_SEES_HEADER_DIR}")
+endforeach()
+list(REMOVE_DUPLICATES OPEN_SEES_HEADER_DIRS)
+
 target_compile_features(opensees_node PRIVATE cxx_std_17)
 target_compile_definitions(opensees_node PRIVATE
   NAPI_VERSION=8
@@ -72,8 +83,7 @@ target_compile_definitions(opensees_node PRIVATE
 )
 target_include_directories(opensees_node PRIVATE
   "${NODE_INCLUDE_DIR}"
-  "${OPEN_SEES_SOURCE_DIR}/SRC"
-  "${OPEN_SEES_SOURCE_DIR}/SRC/tcl"
+  ${OPEN_SEES_HEADER_DIRS}
 )
 target_link_libraries(opensees_node PRIVATE
   OPS_InterpTcl

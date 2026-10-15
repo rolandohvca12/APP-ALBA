@@ -144,7 +144,7 @@ std::string utf8(napi_env env, napi_value value) {
   return result;
 }
 
-napi_value jsString(napi_env env, const char* value, int length = NAPI_AUTO_LENGTH) {
+napi_value jsString(napi_env env, const char* value, size_t length = NAPI_AUTO_LENGTH) {
   napi_value result;
   check(env, napi_create_string_utf8(env, value, length < 0 ? NAPI_AUTO_LENGTH : static_cast<size_t>(length), &result),
         "Unable to create JavaScript string.");
