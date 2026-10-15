@@ -1,7 +1,8 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = new URL('..', import.meta.url).pathname.slice(1);
+const root = fileURLToPath(new URL('..', import.meta.url));
 const publicDeclarations = [
   join(root, 'dist', 'native-index.d.ts'),
   join(root, 'dist', 'native'),
