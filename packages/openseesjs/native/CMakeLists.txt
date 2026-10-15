@@ -42,6 +42,8 @@ if(NOT TARGET HDF5::HDF5)
 endif()
 
 find_package(TCL REQUIRED)
+set(TCL_INCLUDE_DIR "${TCL_INCLUDE_PATH}" CACHE PATH "Tcl include directory" FORCE)
+include_directories(SYSTEM "${TCL_INCLUDE_PATH}")
 if(NOT TARGET tcl::tcl)
   add_library(tcl::tcl UNKNOWN IMPORTED GLOBAL)
   set_target_properties(tcl::tcl PROPERTIES
