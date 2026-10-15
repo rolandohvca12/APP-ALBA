@@ -133,12 +133,12 @@ jobs:
               npm publish "$tarball" --access public --provenance
             fi
           }
-          publish_if_missing "@openseesjs/native-win32-x64" "0.4.0" "artifacts/openseesjs-native-win32-x64-0.4.0.tgz"
-          publish_if_missing "@openseesjs/native-linux-x64" "0.4.0" "artifacts/openseesjs-native-linux-x64-0.4.0.tgz"
+          publish_if_missing "@openseesjs/native-win32-x64" "0.4.0" "./artifacts/openseesjs-native-win32-x64-0.4.0.tgz"
+          publish_if_missing "@openseesjs/native-linux-x64" "0.4.0" "./artifacts/openseesjs-native-linux-x64-0.4.0.tgz"
       - name: Publish public API
         run: |
           if npm view "openseesjs@0.4.0" version >/dev/null 2>&1; then
             echo "openseesjs@0.4.0 is already published; skipping."
           else
-            npm publish artifacts/openseesjs-0.4.0.tgz --access public --provenance
+            npm publish ./artifacts/openseesjs-0.4.0.tgz --access public --provenance
           fi
