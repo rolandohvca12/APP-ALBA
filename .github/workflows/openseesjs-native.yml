@@ -44,7 +44,9 @@ jobs:
             libmetis-dev
       - name: Install JavaScript dependencies
         working-directory: packages/openseesjs
-        run: npm ci --ignore-scripts --workspaces=false
+        run: |
+          npm install --ignore-scripts --workspaces=false --omit=optional
+          npm install --no-save --ignore-scripts @esbuild/linux-x64@0.25.12
       - name: Build Linux runtime
         working-directory: packages/openseesjs
         env:
@@ -79,7 +81,9 @@ jobs:
           node-version: 22
       - name: Install JavaScript dependencies
         working-directory: packages/openseesjs
-        run: npm ci --ignore-scripts --workspaces=false
+        run: |
+          npm install --ignore-scripts --workspaces=false --omit=optional
+          npm install --no-save --ignore-scripts @esbuild/win32-x64@0.25.12
       - name: Verify committed Windows runtime
         working-directory: packages/openseesjs
         env:
