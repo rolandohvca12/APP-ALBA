@@ -24,6 +24,15 @@ if(NOT TARGET HDF5::HDF5)
   )
 endif()
 
+find_package(TCL REQUIRED)
+if(NOT TARGET tcl::tcl)
+  add_library(tcl::tcl UNKNOWN IMPORTED GLOBAL)
+  set_target_properties(tcl::tcl PROPERTIES
+    IMPORTED_LOCATION "${TCL_LIBRARY}"
+    INTERFACE_INCLUDE_DIRECTORIES "${TCL_INCLUDE_PATH}"
+  )
+endif()
+
 add_subdirectory("${OPEN_SEES_SOURCE_DIR}" opensees EXCLUDE_FROM_ALL)
 
 # OpenSees 3.8.0 declares OPS_Api as an empty OBJECT library on Unix.
