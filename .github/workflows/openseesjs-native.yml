@@ -28,8 +28,8 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 120
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
@@ -39,12 +39,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             build-essential gfortran cmake ninja-build git patchelf \
-            tcl-dev zlib1g-dev libopenblas-dev liblapack-dev libarpack2-dev \
+            tcl-dev tk-dev zlib1g-dev libopenblas-dev liblapack-dev libarpack2-dev \
             libsuitesparse-dev libhdf5-dev libeigen3-dev default-libmysqlclient-dev \
             libmetis-dev
       - name: Install JavaScript dependencies
         working-directory: packages/openseesjs
-        run: npm ci --omit=optional --ignore-scripts --workspaces=false
+        run: npm ci --ignore-scripts --workspaces=false
       - name: Build Linux runtime
         working-directory: packages/openseesjs
         env:
@@ -73,13 +73,13 @@ jobs:
   windows-x64:
     runs-on: windows-2025
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
       - name: Install JavaScript dependencies
         working-directory: packages/openseesjs
-        run: npm ci --omit=optional --ignore-scripts --workspaces=false
+        run: npm ci --ignore-scripts --workspaces=false
       - name: Verify committed Windows runtime
         working-directory: packages/openseesjs
         env:
@@ -112,7 +112,7 @@ jobs:
         with:
           path: artifacts
           merge-multiple: true
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org
