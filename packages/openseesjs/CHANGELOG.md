@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 - 2026-10-15
+
+- Add a Linux x64 glibc native runtime and automatic npm platform selection.
+- Add a CMake/GCC build that links directly against OpenSees 3.8.0.
+- Bundle non-system Linux shared libraries with origin-relative runtime paths.
+- Share integrity, provenance and Node-API validation across native packages.
+- Add reproducible Linux CI packaging and native integration tests.
+
 ## 0.3.0 - 2026-09-29
 
 - Add batched domain snapshots for visualization and post-processing.

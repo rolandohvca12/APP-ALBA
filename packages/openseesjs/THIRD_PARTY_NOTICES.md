@@ -1,7 +1,8 @@
 # Third-party notices
 
-The Windows x64 native backend contains or dynamically loads the components
-listed below. The corresponding license texts are distributed in `licenses/`.
+The platform-specific native backends contain or dynamically load the
+components listed below. The corresponding license texts are distributed in
+each runtime package under `licenses/`.
 
 | Component | Purpose | Notice |
 |---|---|---|
@@ -13,7 +14,7 @@ listed below. The corresponding license texts are distributed in `licenses/`.
 | SuiteSparse AMD | Sparse ordering, statically linked | `licenses/AMD.txt` |
 | SuiteSparse UMFPACK | Sparse solver, statically linked | `licenses/UMFPACK.txt` |
 | zlib | Tcl runtime dependency | `licenses/zlib.txt` |
-| GCC runtime libraries | Fortran/MinGW runtime used by numerical DLLs | `licenses/GCC-Runtime.txt` |
+| GCC runtime libraries | C++/Fortran runtime used by native numerical libraries | `licenses/GCC-Runtime.txt` |
 
 OpenSees is copyrighted by The Regents of the University of California. Its
 license permits specified noncommercial and internal uses, requires its notice

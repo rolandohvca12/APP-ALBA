@@ -52,8 +52,15 @@ if ((packageJson.files ?? []).some(path => path.includes('analysis') || path.inc
 if ('opensees-tcl-adapter' in (packageJson.dependencies ?? {})) {
   failures.push('The package must not depend on the legacy Tcl adapter.');
 }
-const windowsRuntimeVersion = packageJson.optionalDependencies?.['@openseesjs/native-win32-x64'];
-if (typeof windowsRuntimeVersion !== 'string') failures.push('The Windows runtime optional dependency is missing.');
+const platformPackages = [
+  ['win32', 'x64', '@openseesjs/native-win32-x64'],
+  ['linux', 'x64', '@openseesjs/native-linux-x64'],
+];
+for (const [, , packageName] of platformPackages) {
+  if (typeof packageJson.optionalDependencies?.[packageName] !== 'string') {
+    failures.push(`The ${packageName} optional dependency is missing.`);
+  }
+}
 if ((packageJson.files ?? []).some(path => path.includes('native/prebuilds'))) {
   failures.push('Native binaries must be published by platform packages, not the root package.');
 }
@@ -63,25 +70,28 @@ if (!packageJson.description || !packageJson.author || !Array.isArray(packageJso
   failures.push('Publication metadata is incomplete.');
 }
 
-const platformRoot = resolve(root, '..', 'openseesjs-win32-x64');
-const buildInfoPath = resolve(platformRoot, 'BUILD_INFO.json');
-if (existsSync(buildInfoPath)) {
-  const platformPackageJson = JSON.parse(readFileSync(resolve(platformRoot, 'package.json'), 'utf8'));
-  if (platformPackageJson.version !== windowsRuntimeVersion) {
-    failures.push('The local platform package must match the optional dependency version.');
+for (const [platform, arch, packageName] of platformPackages) {
+  const platformRoot = resolve(root, '..', `openseesjs-${platform}-${arch}`);
+  const platformPackagePath = resolve(platformRoot, 'package.json');
+  if (!existsSync(platformPackagePath)) {
+    failures.push(`Missing local package for ${packageName}.`);
+    continue;
   }
+  const platformPackageJson = JSON.parse(readFileSync(platformPackagePath, 'utf8'));
+  if (platformPackageJson.name !== packageName) failures.push(`Unexpected package name ${platformPackageJson.name}.`);
+  if (platformPackageJson.version !== packageJson.optionalDependencies[packageName]) {
+    failures.push(`${packageName} must match its optional dependency version.`);
+  }
+  const buildInfoPath = resolve(platformRoot, 'BUILD_INFO.json');
+  if (!existsSync(buildInfoPath)) continue;
   const buildInfo = JSON.parse(readFileSync(buildInfoPath, 'utf8'));
   const binaryPath = resolve(platformRoot, 'opensees.node');
+  if (buildInfo.platform !== platform || buildInfo.arch !== arch) failures.push(`${packageName} BUILD_INFO target is incorrect.`);
   if (buildInfo.openSeesVersion !== '3.8.0') failures.push(`Unexpected OpenSees version ${buildInfo.openSeesVersion}.`);
-  if (!/^[a-f0-9]{64}$/.test(buildInfo.openSeesSourceFingerprintSha256 ?? '')) {
-    failures.push('OpenSees source fingerprint is missing or invalid.');
-  }
-  if (typeof buildInfo.openSeesSourceRevision !== 'string' || buildInfo.openSeesSourceRevision.length === 0) {
-    failures.push('OpenSees source revision or snapshot identity is missing.');
-  }
+  if (!/^[a-f0-9]{64}$/.test(buildInfo.openSeesSourceFingerprintSha256 ?? '')) failures.push(`${packageName} source fingerprint is invalid.`);
   if (existsSync(binaryPath)) {
     const actualHash = createHash('sha256').update(readFileSync(binaryPath)).digest('hex');
-    if (actualHash !== buildInfo.binarySha256) failures.push('Native binary SHA-256 does not match BUILD_INFO.json.');
+    if (actualHash !== buildInfo.binarySha256) failures.push(`${packageName} binary SHA-256 does not match.`);
   }
 }
 

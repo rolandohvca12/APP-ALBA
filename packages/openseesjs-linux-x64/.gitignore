@@ -1,0 +1,3 @@
+opensees.node
+*.so*
+BUILD_INFO.json

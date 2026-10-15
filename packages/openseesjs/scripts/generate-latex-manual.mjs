@@ -198,9 +198,9 @@ const manual = String.raw`\documentclass[11pt,oneside]{book}
   \vfill
   \begin{tabular}{@{}ll@{}}
     Versi\'on documentada: & \textbf{${packageJson.version}} \\
-    Runtime Windows: & \textbf{@openseesjs/native-win32-x64 0.2.2} \\
-    Plataforma de referencia: & Node.js 22+, Windows x64 \\
-    Fecha: & 27 de septiembre de 2026
+    Runtimes nativos: & \textbf{Windows x64 y Linux x64 glibc} \\
+    Plataforma de referencia: & Node.js 22+ \\
+    Fecha: & 15 de octubre de 2026
   \end{tabular}
   \vspace{18mm}
 
@@ -240,9 +240,9 @@ el an\'alisis se ejecuta en memoria y no requiere archivos Tcl intermedios.
 npm install openseesjs@${packageJson.version}
 \end{lstlisting}
 El paquete principal instala autom\'aticamente el runtime compatible con la
-plataforma. Esta versi\'on distribuye
-\code{@openseesjs/native-win32-x64@0.2.2} para Windows x64 y requiere Node.js
-22 o posterior.
+plataforma. Esta versi\'on distribuye los runtimes
+\code{@openseesjs/native-win32-x64@0.4.0} y
+\code{@openseesjs/native-linux-x64@0.4.0}; requiere Node.js 22 o posterior.
 
 \section{Importaci\'on m\'inima}
 \begin{lstlisting}[style=typescript]
@@ -511,7 +511,7 @@ de recursos.
 \begin{itemize}
   \item Inventario de comandos basado en OpenSeesPy 3.8.0.0 y motor OpenSees
   3.8.0.
-  \item Runtime precompilado publicado para Windows x64.
+  \item Runtimes precompilados para Windows x64 y Linux x64 glibc.
   \item Solo una sesi\'on nativa activa por proceso.
   \item Las familias Dodd--Restrepo, StressDensity y PML no est\'an disponibles
   en el backend port\'atil actual.
@@ -551,7 +551,7 @@ ${coverageRows}
 Paquete & openseesjs ${packageJson.version} \\
 Motor & OpenSees 3.8.0 \\
 Inventario & OpenSeesPy 3.8.0.0 \\
-Runtime & @openseesjs/native-win32-x64 0.2.2 \\
+Runtimes & @openseesjs/native-win32-x64 0.4.0; @openseesjs/native-linux-x64 0.4.0 \\
 Node-API & N-API 8 \\
 Fuente & API\_REFERENCE.md, API\_COVERAGE.md y declaraciones TypeScript publicadas \\
 \end{tabularx}

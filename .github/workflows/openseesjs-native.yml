@@ -1,0 +1,140 @@
+name: openseesjs native runtimes
+
+on:
+  push:
+    paths:
+      - "packages/openseesjs/**"
+      - "packages/openseesjs-*-x64/**"
+      - ".github/workflows/openseesjs-native.yml"
+  pull_request:
+    paths:
+      - "packages/openseesjs/**"
+      - "packages/openseesjs-*-x64/**"
+      - ".github/workflows/openseesjs-native.yml"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish verified 0.4.0 packages to npm"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  linux-x64:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: packages/openseesjs/package-lock.json
+      - name: Install native toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential gfortran cmake ninja-build git patchelf \
+            tcl-dev zlib1g-dev libopenblas-dev liblapack-dev libarpack2-dev \
+            libsuitesparse-dev libhdf5-dev libeigen3-dev default-libmysqlclient-dev \
+            libmetis-dev
+      - name: Install JavaScript dependencies
+        working-directory: packages/openseesjs
+        run: npm ci --omit=optional --ignore-scripts --workspaces=false
+      - name: Build Linux runtime
+        working-directory: packages/openseesjs
+        env:
+          OPENSEES_NATIVE_OUTPUT_DIR: ${{ github.workspace }}/packages/openseesjs-linux-x64
+          BUILD_JOBS: "2"
+        run: npm run native:build
+      - name: Verify runtime and execute integration tests
+        working-directory: packages/openseesjs
+        env:
+          OPEN_SEES_NODE_BINDING: ${{ github.workspace }}/packages/openseesjs-linux-x64/opensees.node
+        run: |
+          npm run test
+          npm run test:integration
+          npm run verify:package
+          npm --prefix ../openseesjs-linux-x64 run verify
+          ldd ../openseesjs-linux-x64/opensees.node
+      - name: Pack Linux runtime
+        run: |
+          mkdir -p artifacts
+          npm pack ./packages/openseesjs-linux-x64 --pack-destination ./artifacts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: openseesjs-linux-x64
+          path: artifacts/*.tgz
+
+  windows-x64:
+    runs-on: windows-2025
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install JavaScript dependencies
+        working-directory: packages/openseesjs
+        run: npm ci --omit=optional --ignore-scripts --workspaces=false
+      - name: Verify committed Windows runtime
+        working-directory: packages/openseesjs
+        env:
+          OPEN_SEES_NODE_BINDING: ${{ github.workspace }}\packages\openseesjs-win32-x64\opensees.node
+        run: |
+          npm run test
+          npm run test:integration
+          npm run verify:package
+          npm --prefix ../openseesjs-win32-x64 run verify
+      - name: Pack Windows runtime and API
+        shell: pwsh
+        env:
+          OPEN_SEES_NODE_BINDING: ${{ github.workspace }}\packages\openseesjs-win32-x64\opensees.node
+        run: |
+          New-Item -ItemType Directory -Force artifacts | Out-Null
+          npm pack ./packages/openseesjs-win32-x64 --pack-destination ./artifacts
+          npm pack ./packages/openseesjs --pack-destination ./artifacts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: openseesjs-windows-and-api
+          path: artifacts/*.tgz
+
+  publish:
+    if: github.event_name == 'workflow_dispatch' && inputs.publish
+    needs: [linux-x64, windows-x64]
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: npm install --global npm@latest
+      - name: Publish platform runtimes first
+        run: |
+          publish_if_missing() {
+            package_name="$1"
+            package_version="$2"
+            tarball="$3"
+            if npm view "$package_name@$package_version" version >/dev/null 2>&1; then
+              echo "$package_name@$package_version is already published; skipping."
+            else
+              npm publish "$tarball" --access public --provenance
+            fi
+          }
+          publish_if_missing "@openseesjs/native-win32-x64" "0.4.0" "artifacts/openseesjs-native-win32-x64-0.4.0.tgz"
+          publish_if_missing "@openseesjs/native-linux-x64" "0.4.0" "artifacts/openseesjs-native-linux-x64-0.4.0.tgz"
+      - name: Publish public API
+        run: |
+          if npm view "openseesjs@0.4.0" version >/dev/null 2>&1; then
+            echo "openseesjs@0.4.0 is already published; skipping."
+          else
+            npm publish artifacts/openseesjs-0.4.0.tgz --access public --provenance
+          fi

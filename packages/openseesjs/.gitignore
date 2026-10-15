@@ -1,6 +1,7 @@
 node_modules/
 native/build/
-examples/
+native/vendor/
+native/prebuilds/linux-x64/
 artifacts/
 /diagrams.assets
 OPENSEESJS_API_MANUAL.tex

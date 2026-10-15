@@ -11,7 +11,8 @@
 int OpenSeesAppInit(Tcl_Interp* interpreter);
 
 // The upstream MSVC solution ships these optional Fortran models as Intel-only
-// objects. They are rejected in invoke() until portable builds are available.
+// objects. Linux builds obtain the real symbols from the upstream CMake build.
+#if defined(_WIN32)
 extern "C" int STEEL(...) { return -1; }
 extern "C" int STEELDR(...) { return -1; }
 extern "C" void SDMUC(...) {}
@@ -20,6 +21,7 @@ extern "C" void SDM3D(...) {}
 extern "C" void PML_2D(...) {}
 extern "C" void PML_3D(...) {}
 extern "C" void PSUMAT(...) {}
+#endif
 
 namespace {
 

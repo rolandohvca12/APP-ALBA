@@ -10,8 +10,18 @@ a JavaScript, sin generar ni ejecutar archivos Tcl intermedios.
 npm install openseesjs
 ```
 
-Requiere Node.js 22 o posterior. El runtime opcional actual incluye un binario
-precompilado para Windows x64.
+Requiere Node.js 22 o posterior. `npm` instala automáticamente el runtime
+precompilado correspondiente a Windows x64 o Linux x64 glibc. No es necesario
+instalar Tcl, BLAS, LAPACK ni OpenSees por separado.
+
+| Sistema | Runtime seleccionado |
+|---|---|
+| Windows x64 | `@openseesjs/native-win32-x64` |
+| Linux x64 glibc | `@openseesjs/native-linux-x64` |
+
+Los runtimes son dependencias opcionales porque npm evalúa `os`, `cpu` y
+`libc` durante la instalación. El paquete principal mantiene la misma API en
+ambas plataformas. Alpine/musl y ARM64 todavía no tienen binario publicado.
 
 ## Uso minimo
 

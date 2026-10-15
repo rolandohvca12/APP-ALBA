@@ -1,9 +1,14 @@
 {
   "name": "@openseesjs/native-win32-x64",
-  "version": "0.2.2",
+  "version": "0.4.0",
   "description": "Windows x64 native runtime for openseesjs.",
   "license": "SEE LICENSE IN LICENSE",
   "author": "APP-ALBA contributors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolandohvca12/APP-ALBA.git",
+    "directory": "packages/openseesjs-win32-x64"
+  },
   "os": ["win32"],
   "cpu": ["x64"],
   "engines": { "node": ">=22" },
@@ -20,7 +25,7 @@
   },
   "publishConfig": { "access": "public" },
   "scripts": {
-    "verify": "node scripts/verify-package.mjs",
+    "verify": "node ../openseesjs/scripts/verify-native-package.mjs .",
     "prepack": "npm run verify",
     "prepublishOnly": "npm run verify"
   }

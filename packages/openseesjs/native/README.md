@@ -31,9 +31,17 @@ removed.
 
 ## Build status
 
-Run `npm run native:check` and then `npm run native:build`. The expected binary is:
+Run `npm run native:check` and then `npm run native:build`. The build command
+dispatches to PowerShell/MSVC on Windows and CMake/GCC on Linux. Expected
+binaries are:
 
 `native/prebuilds/win32-x64/opensees.node`
+
+`native/prebuilds/linux-x64/opensees.node`
+
+Linux builds target glibc and stage every non-system `.so` beside the addon.
+Each staged ELF receives `RPATH=$ORIGIN`, so consumers do not need Tcl, BLAS,
+LAPACK, ARPACK or Fortran runtime packages installed globally.
 
 The distributed addon is compiled as an optimized Release binary. Every build
 writes `native/BUILD_INFO.json` with the OpenSees version, source revision when
@@ -41,8 +49,9 @@ available, source-input fingerprint and final binary SHA-256. Set
 `OPEN_SEES_SOURCE_REVISION` when building from a source archive without Git
 metadata.
 
-The source location can be changed with `OPEN_SEES_SOURCE_DIR`; the binary can
-be overridden at runtime with `OPEN_SEES_NODE_BINDING`.
+The source location can be changed with `OPEN_SEES_SOURCE_DIR`; when omitted on
+Linux, the build clones the pinned `v3.8.0` tag. The binary can be overridden at
+runtime with `OPEN_SEES_NODE_BINDING`.
 
 ## Current native coverage
 

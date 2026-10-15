@@ -18,6 +18,15 @@ function platformPackageName(): string {
   return `@openseesjs/native-${process.platform}-${process.arch}`;
 }
 
+function unsupportedPlatformReason(): string | undefined {
+  if (process.platform !== 'linux') return undefined;
+  const report = process.report?.getReport() as { header?: { glibcVersionRuntime?: string } } | undefined;
+  const header = report?.header;
+  return header?.glibcVersionRuntime
+    ? undefined
+    : 'The published Linux runtime targets glibc. Alpine and other musl distributions are not supported yet.';
+}
+
 function resolveBinding(): { path: string; distribution: OpenSeesNativeAvailability['distribution'] } {
   const override = process.env.OPEN_SEES_NODE_BINDING;
   if (override) return { path: resolve(override), distribution: 'environment' };
@@ -50,6 +59,10 @@ export function inspectNativeBackend(bindingPath = defaultNativeBindingPath()): 
   const automatic = resolveBinding();
   const distribution = resolved === automatic.path ? automatic.distribution : 'explicit';
   const base = { bindingPath: resolved, platform: process.platform, arch: process.arch, distribution } as const;
+  const platformReason = unsupportedPlatformReason();
+  if (platformReason && bindingPath === defaultNativeBindingPath()) {
+    return { available: false, ...base, reason: platformReason };
+  }
   if (!existsSync(resolved)) {
     return {
       available: false,

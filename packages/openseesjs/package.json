@@ -1,9 +1,14 @@
 {
   "name": "openseesjs",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Strongly typed OpenSees 3.8 native addon for Node.js and TypeScript.",
   "license": "SEE LICENSE IN LICENSE",
   "author": "APP-ALBA contributors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolandohvca12/APP-ALBA.git",
+    "directory": "packages/openseesjs"
+  },
   "keywords": [
     "opensees",
     "structural-engineering",
@@ -59,7 +64,7 @@
     "prepack": "npm run build && npm run verify:package",
     "prepublishOnly": "npm run verify:publish",
     "native:check": "node native/check-build-environment.mjs",
-    "native:build": "powershell -NoProfile -ExecutionPolicy Bypass -File native/build-native.ps1"
+    "native:build": "node native/build-native.mjs"
   },
   "type": "module",
   "engines": {
@@ -69,7 +74,8 @@
     "access": "public"
   },
   "optionalDependencies": {
-    "@openseesjs/native-win32-x64": "0.2.2"
+    "@openseesjs/native-win32-x64": "0.4.0",
+    "@openseesjs/native-linux-x64": "0.4.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

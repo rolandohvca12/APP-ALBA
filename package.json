@@ -12,7 +12,6 @@
     "packages/structural-analysis",
     "packages/openseesjs",
     "packages/opensees-visualizer",
-    "packages/openseesjs-win32-x64",
     "packages/engineering-units",
     "packages/peru-rne"
   ],

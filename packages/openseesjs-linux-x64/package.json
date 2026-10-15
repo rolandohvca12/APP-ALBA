@@ -1,0 +1,34 @@
+{
+  "name": "@openseesjs/native-linux-x64",
+  "version": "0.4.0",
+  "description": "Linux x64 glibc native runtime for openseesjs.",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "APP-ALBA contributors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolandohvca12/APP-ALBA.git",
+    "directory": "packages/openseesjs-linux-x64"
+  },
+  "os": ["linux"],
+  "cpu": ["x64"],
+  "libc": ["glibc"],
+  "engines": { "node": ">=22" },
+  "files": [
+    "opensees.node",
+    "*.so*",
+    "BUILD_INFO.json",
+    "licenses",
+    "LICENSE",
+    "README.md",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "exports": {
+    "./opensees.node": "./opensees.node"
+  },
+  "publishConfig": { "access": "public" },
+  "scripts": {
+    "verify": "node ../openseesjs/scripts/verify-native-package.mjs .",
+    "prepack": "npm run verify",
+    "prepublishOnly": "npm run verify"
+  }
+}
